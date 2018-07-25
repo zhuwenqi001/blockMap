@@ -8,6 +8,7 @@ import MarkerFilter from './MarkerFilter'
 class App extends Component {
   constructor() {
     super();
+    //地图初始信息
     this.mapOptions = {
       key: 'b22653ba2c2dba764dfebc7ced57dcd9',
       center: {
@@ -15,55 +16,46 @@ class App extends Component {
         latitude: 30.592849
       },
       zoom: 10
-    };
-    this.state = {
-      markers: [{
-        pos: {
-          longitude: 114.36432190000005,
-          latitude: 30.5360485
-        },
-        name: '武汉大学',
-        id: '1'
-      }, {
-        pos: {
-          longitude: 114.3614063,
-          latitude: 30.5592465
-        },
-        name: '华中科技大学',
-        id: '2'
-
-      }, {
-        pos: {
-          longitude: 114.34248439999999,
-          latitude: 30.5986568
-        },
-        name: '武汉理工大学',
-        id: '3'
-
-      }, {
-        pos: {
-          longitude: 114.36452859999997,
-          latitude: 30.5179264
-        },
-        name: '华中师范大学',
-        id: '4'
-
-      }, {
-        pos: {
-          longitude: 114.33832159999997,
-          latitude: 30.5169273
-        },
-        name: '武汉科技大学',
-        id: '5'
-
-      }]
     }
+    this.state = {
+      markers: [],
+      isFilterShow: 'show'
+    }
+    this.toggleControl = () => {
+      this.setState(state => ({
+        isFilterShow: (state.isFilterShow === 'show') ? 'hide' : 'show'
+      }))
+    }
+
+  }
+  componentDidMount() {
+    //挂载后，加载数据
+    fetch('./markers.json', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }).then(res => res.json())
+      .then(data => {
+        this.setState(state => ({
+          markers: data.markers
+        }));
+      });
+
   }
   render() {
     return (
-      <div className="container">
+      <div className={`container ${this.state.isFilterShow}`}>
+      {/*标志点筛选*/}
         <MarkerFilter markers={this.state.markers}/>
-        <div className='map'><BaseMap mapOptions={this.mapOptions} markers={this.state.markers}/></div>
+      {/*包含切换按钮的地图*/}
+        <div className='map'>
+          <div className='topBar'>
+              <button className='toggleFilter' onClick={this.toggleControl}>Navigation</button>
+          </div>
+        {/*基础地图*/}
+          <BaseMap mapOptions={this.mapOptions} markers={this.state.markers}/>
+        </div>
       </div>
     )
   }

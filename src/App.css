@@ -4,6 +4,15 @@
   left: 0;
   right: 0;
   bottom: 0;
+  overflow: hidden;
+}
+
+.container.hide .map {
+  left: 0;
+}
+
+.container.hide .markerfilter {
+  left: -200px;
 }
 
 /*地图*/
@@ -23,13 +32,56 @@
   left: 0;
   bottom: 0;
   overflow: auto;
-  text-align: center;
+  background: #212121;
+  color: #989898;
 }
 
 .markerfilter h1 {
   font-size: 20px;
+  height: 50px;
+  line-height: 50px;
+  text-indent: 20px;
+  font-weight: normal;
+}
+
+.markerfilter input[type='text'] {
+  display: block;
+  font-size: 14px;
+  padding: 8px;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  width: 100%;
+  background: #efefef;
 }
 
 .markerfilter li {
-  font-size: 16px;
+  font-size: 14px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.markerfilter li:hover {
+  background: #5a5a5a;
+}
+
+/*切换按钮*/
+.topBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: #212121;
+  z-index: 10;
+}
+
+.toggleFilter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 50px;
+  background: url('./img/navigator.png') no-repeat center/30px;
+  cursor: pointer;
+  font-size: 0;
 }
