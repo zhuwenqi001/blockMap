@@ -8,15 +8,7 @@ import MarkerFilter from './MarkerFilter'
 class App extends Component {
   constructor() {
     super();
-    //地图初始信息
-    this.mapOptions = {
-      key: 'b22653ba2c2dba764dfebc7ced57dcd9',
-      center: {
-        longitude: 114.30553899999995,
-        latitude: 30.592849
-      },
-      zoom: 10
-    }
+
     this.state = {
       markers: [],
       isFilterShow: 'show'
@@ -54,7 +46,7 @@ class App extends Component {
               <button className='toggleFilter' onClick={this.toggleControl}>Navigation</button>
           </div>
         {/*基础地图*/}
-          <BaseMap mapOptions={this.mapOptions} markers={this.state.markers}/>
+          <BaseMap markers={this.state.markers}/>
         </div>
       </div>
     )
