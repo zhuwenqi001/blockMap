@@ -1,3 +1,4 @@
+//参考：https://github.com/sunyongjian/blog/issues/27
 class EventEmitter {
   _event = {}
 
