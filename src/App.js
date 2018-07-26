@@ -18,9 +18,26 @@ class App extends Component {
         isFilterShow: (state.isFilterShow === 'show') ? 'hide' : 'show'
       }))
     }
+    //响应窗口变化 UI控制
+    this.onWindowResize = () => {
+      if (window.innerWidth <= 767 && this.state.isFilterShow === 'show') {
+        //手机
+        this.setState(state => ({
+          isFilterShow: 'hide'
+        }))
+      } else if (window.innerWidth > 767 && this.state.isFilterShow === 'hide') {
+        //大屏
+        this.setState(state => ({
+          isFilterShow: 'show'
+        }))
+      }
+    }
 
   }
+  //挂载
   componentDidMount() {
+    //监听窗口变化
+    window.addEventListener('resize', this.onWindowResize)
     //挂载后，加载数据
     fetch('./markers.json', {
         headers: {
@@ -33,8 +50,12 @@ class App extends Component {
           markers: data.markers
         }));
       });
-
   }
+  //卸载
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onWindowResize)
+  }
+
   render() {
     return (
       <div className={`container ${this.state.isFilterShow}`}>

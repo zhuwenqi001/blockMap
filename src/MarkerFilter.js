@@ -23,7 +23,9 @@ class MarkerFilter extends Component {
 				this.showmarkers = markers.filter((item) => match.test(item.name));
 			}
 			event.emit('updateMarkersData', query, this.showmarkers)
-
+		}
+		this.handleLiClick = (title, pos) => {
+			event.emit('choseMarker', title, pos)
 		}
 
 	}
@@ -49,7 +51,7 @@ class MarkerFilter extends Component {
 				onChange={(event)=>{this.updateQuery(event.target.value,markers)}}
 				/>
 				<ul>
-					{showmarkersCopy.map(item=>(<li key={item.id}>{item.name}</li>))}
+					{showmarkersCopy.map(item=>(<li key={item.id} onClick={()=>{this.handleLiClick(item.name,item.pos)}}>{item.name}</li>))}
 				</ul>
 			</div>
 		)
