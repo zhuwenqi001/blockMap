@@ -128,3 +128,7 @@
   }
 
 }
+
+.visibleNone {
+  display: none;
+}

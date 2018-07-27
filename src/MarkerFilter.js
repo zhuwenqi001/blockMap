@@ -44,7 +44,9 @@ class MarkerFilter extends Component {
 		return (
 			<div className="markerfilter">
 				<h1>地址筛选</h1>
+				<label for='filtermarker' class="visibleNone">名称搜索</label>
 				<input 
+				name='filtermarker'
 				type='text'
 				placeholder='名称搜索'
 				value={this.state.query}
