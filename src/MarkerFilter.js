@@ -57,8 +57,8 @@ class MarkerFilter extends Component {
 				value={this.state.query}
 				onChange={(event)=>{this.updateQuery(event.target.value,markers)}}
 				/>
-				<ul role='listbox'>
-					{showmarkersCopy.map(item=>(<li key={item.id} tabIndex='0' onKeyPress={(e)=>{this.handleKeyPress(e,item.name,item.pos)}} onClick={()=>{this.handleLiClick(item.name,item.pos)}}>{item.name}</li>))}
+				<ul>
+					{showmarkersCopy.map(item=>(<li key={item.id} role='button' tabIndex='0' onKeyPress={(e)=>{this.handleKeyPress(e,item.name,item.pos)}} onClick={()=>{this.handleLiClick(item.name,item.pos)}}>{item.name}</li>))}
 				</ul>
 			</div>
 		)
