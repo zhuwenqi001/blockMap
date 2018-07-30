@@ -27,7 +27,11 @@ class MarkerFilter extends Component {
 		this.handleLiClick = (title, pos) => {
 			event.emit('choseMarker', title, pos)
 		}
-
+		this.handleKeyPress = (e, title, pos) => {
+			if (e.key === 'Enter') {
+				event.emit('choseMarker', title, pos)
+			}
+		}
 	}
 
 	render() {
@@ -44,16 +48,17 @@ class MarkerFilter extends Component {
 		return (
 			<div className="markerfilter">
 				<h1>地址筛选</h1>
-				<label for='filtermarker' class="visibleNone">名称搜索</label>
+				<label htmlFor='filtermarker' className="visibleNone">名称搜索</label>
 				<input 
+				role='searchbox'
 				name='filtermarker'
 				type='text'
 				placeholder='名称搜索'
 				value={this.state.query}
 				onChange={(event)=>{this.updateQuery(event.target.value,markers)}}
 				/>
-				<ul>
-					{showmarkersCopy.map(item=>(<li key={item.id} onClick={()=>{this.handleLiClick(item.name,item.pos)}}>{item.name}</li>))}
+				<ul role='listbox'>
+					{showmarkersCopy.map(item=>(<li key={item.id} tabIndex='0' onKeyPress={(e)=>{this.handleKeyPress(e,item.name,item.pos)}} onClick={()=>{this.handleLiClick(item.name,item.pos)}}>{item.name}</li>))}
 				</ul>
 			</div>
 		)
